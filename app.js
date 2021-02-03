@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const Category = require('./models/category.js')
 const Record = require('./models/record.js')
 const formateMongooseDate = require('./formateMongooseDate.js')
+const generateIconHTML = require('./generateIconHTML.js')
 
 mongoose.connect('mongodb://localhost:27017/expense-tracker', { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
@@ -45,6 +46,7 @@ app.get('/records', (req, res) => {
           records.forEach(record => {
             totalAmount += Number(record.amount)
             record.date = formateMongooseDate(record.date)
+            record.iconHTML = generateIconHTML(record.category)
           })
           res.render('index', { categories, records, totalAmount })
         })
