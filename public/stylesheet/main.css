@@ -3,14 +3,26 @@
   color: #fd7e14;
 }
 
-.icon {
-  margin-right: 10px;
+.record .icon {
   color: #65b2bf;
+  padding-right: 0;
+  margin-left: 3vw;
 }
 
 .record:nth-child(odd) {
   background: #eeeeee;
 }
+
+.record .name,
+.record .amount,
+.btn {
+  font-size: larger;
+}
+
+.record .amount{
+  margin-right: 3vw;
+}
+ 
 
 .button-box {
   background-color: #ffffff;
@@ -29,4 +41,18 @@
 .btn-new {
   display: block;
   margin: 5vh auto 0;
+}
+
+@media screen and (max-width: 768px) {
+  .record .icon {
+    margin-top: 2vh;
+  }
+
+  .record .amount-box {
+    justify-content: center !important;
+  }
+
+  .button-box {
+    background-color: transparent;
+  }
 }
