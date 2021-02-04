@@ -101,6 +101,16 @@ app.post('/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
+app.post('/:id/delete', (req, res) => {
+  const id = req.params.id
+  Record.findById(id)
+    .then(record => {
+      record.remove()
+      res.redirect('/')
+    })
+    .catch(error => console.log(error))
+})
+
 app.listen(PORT, () => {
   console.log(`express is listening on http://localhost:${PORT}`)
 })
