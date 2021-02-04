@@ -1,6 +1,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 require('./config/mongoose.js')
 
@@ -17,6 +18,7 @@ app.set('view engine', 'handlebars')
 
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 
 app.get('/', (req, res) => {
   const searchedCategory = req.query.category || ''
@@ -86,7 +88,7 @@ app.post('/', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.post('/:id', (req, res) => {
+app.put('/:id', (req, res) => {
   const id = req.params.id
   const { name, date, category, amount } = req.body
   Record.findById(id)
@@ -101,7 +103,7 @@ app.post('/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.post('/:id/delete', (req, res) => {
+app.delete('/:id', (req, res) => {
   const id = req.params.id
   Record.findById(id)
     .then(record => {
