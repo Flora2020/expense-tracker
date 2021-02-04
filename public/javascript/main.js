@@ -12,3 +12,15 @@ if (categoryRecord) {
     }
   }
 }
+
+// confirm before deleting a record
+const container = document.getElementById('container')
+container.addEventListener('click', (event) => {
+  if (event.target.classList.contains('btn-delete')) {
+    const msg = '確定要刪除此筆支出嗎？'
+    if (confirm(msg)) {
+      return true
+    }
+    event.preventDefault()
+  }
+})
