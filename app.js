@@ -46,6 +46,14 @@ app.get('/', (req, res) => {
     .catch(error => console.log(error))
 })
 
+app.get('/new', (req, res) => {
+  Category.find()
+    .lean()
+    .then(categories => {
+      res.render('new', { categories })
+    })
+})
+
 app.get('/:id/edit', (req, res) => {
   const id = req.params.id
   const categories = []
@@ -60,6 +68,20 @@ app.get('/:id/edit', (req, res) => {
           res.render('edit', { categories, record })
         })
         .catch(error => console.log(error))
+    })
+    .catch(error => console.log(error))
+})
+
+app.post('/', (req, res) => {
+  const { name, date, category, amount } = req.body
+  Record.create({
+    name: name,
+    date: date,
+    category: category,
+    amount: amount
+  })
+    .then(() => {
+      res.redirect('/')
     })
     .catch(error => console.log(error))
 })
