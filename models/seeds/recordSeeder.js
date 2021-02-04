@@ -4,8 +4,9 @@ const records = require('./records.js')
 const db = require('../../config/mongoose.js')
 
 db.once('open', () => {
-  records.forEach(record => {
-    Record.create(record)
-  })
-  console.log('records done!')
+  Record.insertMany(records)
+    .then(() => {
+      console.log('records done!')
+      db.close()
+    })
 })
