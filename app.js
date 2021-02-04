@@ -36,7 +36,7 @@ app.get('/records', (req, res) => {
         .then(records => {
           records.forEach(record => {
             totalAmount += Number(record.amount)
-            record.date = formateMongooseDate(record.date)
+            record.date = formateMongooseDate(record.date, '/')
             record.iconHTML = generateIconHTML(record.category)
           })
           res.render('index', { categories, records, totalAmount, searchedCategory })
@@ -56,8 +56,7 @@ app.get('/records/:id/edit', (req, res) => {
       Record.findById(id)
         .lean()
         .then(record => {
-          date = formateMongooseDate(record.date)
-          record.date = date.replace('/', '-').replace('/', '-')
+          record.date = formateMongooseDate(record.date, '-')
           res.render('edit', { categories, record })
         })
         .catch(error => console.log(error))

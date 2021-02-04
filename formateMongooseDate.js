@@ -1,4 +1,4 @@
-function formateMongooseDate(date) {
+function formateMongooseDate(date, punctuation) {
   //取出日期
   date = date.toString().slice(4, 15)
   const dateArray = date.split(' ')
@@ -18,7 +18,7 @@ function formateMongooseDate(date) {
   }
 
   //將日期拼成設計稿上的格式
-  return `${dateArray[2]}/${dateArray[0]}/${dateArray[1]}`
+  return `${dateArray[2]}${punctuation}${dateArray[0]}${punctuation}${dateArray[1]}`
 }
 
 module.exports = formateMongooseDate
