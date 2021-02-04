@@ -65,7 +65,18 @@ app.get('/records/:id/edit', (req, res) => {
 })
 
 app.post('/records/:id', (req, res) => {
-  console.log('req.body:', req.body)
+  const id = req.params.id
+  const { name, date, category, amount } = req.body
+  Record.findById(id)
+    .then((record) => {
+      record.name = name
+      record.date = date
+      record.category = category
+      record.amount = amount
+      record.save()
+      res.redirect('/records')
+    })
+    .catch(error => console.log(error))
 })
 
 app.listen(PORT, () => {
