@@ -7,7 +7,7 @@ const router = require('./routes/index.js')
 require('./config/mongoose.js')
 
 const app = express()
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
