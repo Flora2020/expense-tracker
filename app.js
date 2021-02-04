@@ -45,6 +45,29 @@ app.get('/records', (req, res) => {
     .catch(error => console.log(error))
 })
 
+app.get('/records/:id/edit', (req, res) => {
+  const id = req.params.id
+  const categories = []
+  Category.find()
+    .lean()
+    .then(items => {
+      categories.push(...items)
+      Record.findById(id)
+        .lean()
+        .then(record => {
+          date = formateMongooseDate(record.date)
+          record.date = date.replace('/', '-').replace('/', '-')
+          res.render('edit', { categories, record })
+        })
+        .catch(error => console.log(error))
+    })
+    .catch(error => console.log(error))
+})
+
+app.post('/records/:id', (req, res) => {
+  console.log('req.body:', req.body)
+})
+
 app.listen(PORT, () => {
   console.log(`express is listening on http://localhost:${PORT}`)
 })

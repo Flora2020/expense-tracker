@@ -15,8 +15,13 @@
 
 .record .name,
 .record .amount,
-.btn {
+.btn,
+.font-size-larger {
   font-size: larger;
+}
+
+.font-size-large {
+  font-size: large;
 }
 
 .record .amount{
@@ -43,6 +48,10 @@
   margin: 5vh auto 0;
 }
 
+.container-narrow {
+  width: 50vw;
+}
+
 @media screen and (max-width: 768px) {
   .record .icon {
     margin-top: 2vh;
@@ -55,4 +64,8 @@
   .button-box {
     background-color: transparent;
   }
-}
+
+  .container-narrow {
+    width: 100vw;
+  }
+} 
