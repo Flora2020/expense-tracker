@@ -18,7 +18,7 @@ app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.get('/records', (req, res) => {
+app.get('/', (req, res) => {
   const searchedCategory = req.query.category || ''
   const filter = {}
   let totalAmount = 0
@@ -46,7 +46,7 @@ app.get('/records', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.get('/records/:id/edit', (req, res) => {
+app.get('/:id/edit', (req, res) => {
   const id = req.params.id
   const categories = []
   Category.find()
@@ -64,7 +64,7 @@ app.get('/records/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.post('/records/:id', (req, res) => {
+app.post('/:id', (req, res) => {
   const id = req.params.id
   const { name, date, category, amount } = req.body
   Record.findById(id)
@@ -74,7 +74,7 @@ app.post('/records/:id', (req, res) => {
       record.category = category
       record.amount = amount
       record.save()
-      res.redirect('/records')
+      res.redirect('/')
     })
     .catch(error => console.log(error))
 })
