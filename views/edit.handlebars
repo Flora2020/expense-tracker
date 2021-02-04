@@ -1,4 +1,4 @@
-<form action="/records/{{record._id}}?_method=PUT" method="POST">
+<form action="/records/{{record._id}}?_method=PUT" method="POST" class="needs-validation" novalidate>
   <div class="container container-narrow">
     <div class="row mt-3">
       <div class="col-4">*必填欄位</div>
@@ -8,14 +8,21 @@
     <div class="row mt-3 font-size-larger">
       <span class="col-4">名稱*：</span>
       <div class="col-8">
-        <input class="form-control font-size-large" name="name" type="text" placeholder="早餐" value="{{record.name}}">
+        <input class="form-control font-size-large" name="name" type="text" placeholder="早餐" value="{{record.name}}"
+          required>
+        <div class="invalid-feedback">
+          請輸入支出名稱
+        </div>
       </div>
     </div>
 
     <div class="row mt-3 font-size-larger">
       <div class="col-4">日期*：</div>
       <div class="col-8">
-        <input class="form-control  font-size-large" name="date" type="date" value="{{record.date}}">
+        <input class="form-control  font-size-large" name="date" type="date" value="{{record.date}}" required>
+        <div class="invalid-feedback">
+          請輸入日期
+        </div>
       </div>
     </div>
 
@@ -23,11 +30,14 @@
       <div class="col-4">類別*：</div>
       <div class="col-8">
         <select class="form-select  font-size-large" name="category" aria-label="select category"
-          data-selected="{{record.category}}" id="categoryRecord">
+          data-selected="{{record.category}}" id="categoryRecord" required>
           {{#each categories}}
           <option value="{{this.name}}">{{this.name}}</option>
           {{/each}}
         </select>
+        <div class="invalid-feedback">
+          請輸入類別
+        </div>
       </div>
     </div>
 
@@ -35,7 +45,10 @@
       <div class="col-4">金額*：</div>
       <div class="col-8">
         <input class="form-select  font-size-large" name="amount" placeholder="50" type="number" setp="1" min="0"
-          value="{{record.amount}}">
+          value="{{record.amount}}" required>
+        <div class="invalid-feedback">
+          請輸入金額
+        </div>
       </div>
     </div>
 
@@ -47,3 +60,24 @@
     </div>
   </div>
 </form>
+
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function () {
+    'use strict';
+    window.addEventListener('load', function () {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function (form) {
+        form.addEventListener('submit', function (event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+</script>
