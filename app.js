@@ -19,10 +19,11 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/records', (req, res) => {
+  const searchedCategory = req.query.category || ''
   const filter = {}
   let totalAmount = 0
-  if (req.query.category) {
-    filter.category = req.query.category
+  if (searchedCategory) {
+    filter.category = searchedCategory
   }
   const categories = []
   Category.find()
@@ -38,7 +39,7 @@ app.get('/records', (req, res) => {
             record.date = formateMongooseDate(record.date)
             record.iconHTML = generateIconHTML(record.category)
           })
-          res.render('index', { categories, records, totalAmount })
+          res.render('index', { categories, records, totalAmount, searchedCategory })
         })
         .catch(error => console.log(error))
     })
