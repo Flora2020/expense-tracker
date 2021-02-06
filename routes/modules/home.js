@@ -26,9 +26,11 @@ router.get('/', (req, res) => {
         .then(records => {
           records.forEach(record => {
             totalAmount += Number(record.amount)
+            record.amount = record.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             record.date = formateMongooseDate(record.date, '/')
             record.iconHTML = generateIconHTML(record.category)
           })
+          totalAmount = totalAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
           res.render('index', { categories, records, totalAmount, searchedCategory })
         })
         .catch(error => console.log(error))
