@@ -1,2 +1,57 @@
 {{> message}}
-<h1>Greetings from login page!</h1>
+<form action="/users/login" method="POST" class="needs-validation" novalidate>
+  <div class="container container-narrow">
+    <div class="row mt-3">
+      <div class="col-4">*必填欄位</div>
+      <div class="col-8 font-size-larger">請輸入你的登入資訊</div>
+    </div>
+
+    <div class="row mt-3 font-size-larger">
+      <div class="col-4">電子信箱*：</div>
+      <div class="col-8">
+        <input class="form-control font-size-large" name="email" type="email" required>
+        <div class="invalid-feedback">
+          請輸入電子信箱
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-3 font-size-larger">
+      <div class="col-4">密碼*：</div>
+      <div class="col-8">
+        <input class="form-control font-size-large" name="password" type="password" required>
+        <div class="invalid-feedback">
+          請輸入密碼
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-4"></div>
+      <div class="col-8">
+        <button class="btn btn-major w-100" type="submit">送出</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function () {
+    'use strict';
+    window.addEventListener('load', function () {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function (form) {
+        form.addEventListener('submit', function (event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+</script>
