@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/expense-tracker'
+const MONGODB_URI = process.env.MONGODB_URI
 
 mongoose.set('useCreateIndex', true)
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
