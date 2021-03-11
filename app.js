@@ -6,6 +6,7 @@ const session = require('express-session')
 const flash = require('connect-flash')
 
 const router = require('./routes/index.js')
+const usePassport = require('./config/passport.js')
 require('./config/mongoose.js')
 
 const app = express()
@@ -23,7 +24,11 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(flash())
+
+usePassport(app)
+
 app.use((req, res, next) => {
+  res.locals.user = req.user
   res.locals.success_msg = req.flash('success_msg')
   res.locals.warning_msg = req.flash('warning_msg')
   next()
