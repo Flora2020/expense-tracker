@@ -15,13 +15,14 @@ router.get('/new', (req, res) => {
 })
 
 router.get('/:id/edit', (req, res) => {
-  const id = req.params.id
+  const _id = req.params.id
+  const userId = req.user._id
   const categories = []
   Category.find()
     .lean()
     .then(items => {
       categories.push(...items)
-      Record.findById(id)
+      Record.findOne({ _id, userId })
         .lean()
         .then(record => {
           record.date = formateMongooseDate(record.date, '-')
@@ -38,7 +39,8 @@ router.post('/', (req, res) => {
     name: name,
     date: date,
     category: category,
-    amount: amount
+    amount: amount,
+    userId: req.user._id
   })
     .then(() => {
       res.redirect('/')
@@ -47,9 +49,10 @@ router.post('/', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
-  const id = req.params.id
+  const _id = req.params.id
+  const userId = req.user._id
   const { name, date, category, amount } = req.body
-  Record.findById(id)
+  Record.findOne({ _id, userId })
     .then((record) => {
       record.name = name
       record.date = date
@@ -62,8 +65,9 @@ router.put('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-  const id = req.params.id
-  Record.findById(id)
+  const _id = req.params.id
+  const userId = req.user._id
+  Record.findOne({ _id, userId })
     .then(record => {
       record.remove()
       res.redirect('/')

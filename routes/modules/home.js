@@ -9,12 +9,12 @@ const router = express.Router()
 
 router.get('/', (req, res) => {
   const searchedCategory = req.query.category || ''
-  const filter = {}
+  const categories = []
+  const filter = { userId: req.user._id }
   let totalAmount = 0
   if (searchedCategory) {
     filter.category = searchedCategory
   }
-  const categories = []
   Category.find()
     .lean()
     .then((items) => {
