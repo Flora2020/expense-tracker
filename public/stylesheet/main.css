@@ -6,11 +6,17 @@
 .record .icon {
   color: #65b2bf;
   padding-right: 0;
-  margin-left: 3vw;
 }
 
 .record:nth-child(odd) {
   background: #eeeeee;
+}
+
+.flex-column-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .record .name,
@@ -23,12 +29,7 @@
 .font-size-large {
   font-size: large;
 }
-
-.record .amount{
-  margin-right: 3vw;
-}
  
-
 .button-box {
   background-color: #ffffff;
 }
@@ -57,15 +58,18 @@
     margin-top: 2vh;
   }
 
-  .record .amount-box {
-    justify-content: center !important;
-  }
-
   .button-box {
     background-color: transparent;
   }
 
   .container-narrow {
     width: 100vw;
+  }
+
+  .flex-column-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 } 

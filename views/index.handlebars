@@ -24,14 +24,15 @@
   <div class="col-md-1 d-flex align-items-center justify-content-center icon">
     {{{this.iconHTML}}}
   </div>
-  <div class="col-3 py-2">
+  <div class="col-md-3 py-2 flex-column-center">
     <div class="name mb-1">{{this.name}}</div>
     <div class="date">{{this.date}}</div>
   </div>
-  <div class="col-4 d-flex align-items-center justify-content-end amount-box">
-    <div class="amount">{{this.amount}}</div>
+  <div class="col-md-4 flex-column-right flex-column-center">
+    <div class="amount mb-1">{{this.amount}}</div>
+    <div class="marchant">{{this.merchant}}</div>
   </div>
-  <div class="col-4 d-flex justify-content-evenly align-items-center button-box">
+  <div class="col-md-4 d-flex justify-content-evenly align-items-center button-box">
     <form action="/records/{{this._id}}/edit" method="get">
       <button class="btn" type="submit">修改</button>
     </form>
