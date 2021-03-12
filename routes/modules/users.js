@@ -58,6 +58,12 @@ router.post('/login',
     failureRedirect: '/users/login',
     failureFlash: true
   })
-);
+)
+
+router.get('/logout', (req, res) => {
+  req.logout()
+  req.flash('success_msg', '你已成功登出。')
+  res.redirect('/users/login')
+})
 
 module.exports = router
