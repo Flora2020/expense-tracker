@@ -5,11 +5,19 @@
 - Node.js 10.15.0
 
 #### 套件
-- express 4.17.1
+- bcryptjs 2.4.3
 - body-parser 1.19.0
+- connect-flash 0.1.1
+- dotenv 8.2.0
+- express 4.17.1
 - express-handlebars 5.2.0
-- mongoose 5.11.14
+- express-session 1.17.1
+- handlebars 4.7.7
 - method-override 3.0.0
+- mongoose 5.11.14
+- passport 0.4.1
+- passport-facebook 3.0.0
+- passport-local 1.0.0
 
 #### 資料庫
 - MongoDB Community Server 4.2.12
@@ -46,10 +54,15 @@ npm run seed
 ```
 
 ## 功能 (features)
-- 瀏覽所有支出紀錄
-- 新增支出紀錄
-- 編輯支出紀錄
-- 刪除支出紀錄
+- 註冊帳號
+- 登入帳號
+- 登出帳號
+- 登入後，可以：
+  - 瀏覽個人所有支出紀錄
+  - 新增個人支出紀錄
+  - 編輯個人支出紀錄
+  - 刪除個人支出紀錄
+  - 以分類或日期篩選支出紀錄
 
 ## 預覽圖 (preview image)
-![This is a preview image.](https://github.com/Flora2020/images/blob/main/expense-tracker.jpg?raw=true "This is a preview image.")
+![This is a preview image.](https://github.com/Flora2020/images/blob/main/expense-tracker-login.jpg?raw=true "This is a preview image.")
