@@ -3,6 +3,7 @@ const express = require('express')
 const Category = require('../../models/category.js')
 const Record = require('../../models/record.js')
 const formateMongooseDate = require('../../formateMongooseDate.js')
+const isValidDate = require('../../isValidDate.js')
 
 const router = express.Router()
 
@@ -35,6 +36,12 @@ router.get('/:id/edit', (req, res) => {
 
 router.post('/', (req, res) => {
   const { name, date, category, merchant, amount } = req.body
+
+  if (!isValidDate(date)) {
+    req.flash('warning_msg', '不存在的日期，或日期格式不正確。正確的日期格式為 YYYY-MM-DD。')
+    return res.redirect('/records/new')
+  }
+
   Record.create({
     name: name,
     date: date,
@@ -53,6 +60,12 @@ router.put('/:id', (req, res) => {
   const _id = req.params.id
   const userId = req.user._id
   const { name, date, category, merchant, amount } = req.body
+
+  if (!isValidDate(date)) {
+    req.flash('warning_msg', '不存在的日期，或日期格式不正確。正確的日期格式為 YYYY-MM-DD。')
+    return res.redirect(`/records/${_id}/edit`)
+  }
+
   Record.findOne({ _id, userId })
     .then((record) => {
       record.name = name

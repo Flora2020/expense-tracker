@@ -8,6 +8,7 @@ const flash = require('connect-flash')
 const router = require('./routes/index.js')
 const usePassport = require('./config/passport.js')
 require('./config/mongoose.js')
+require('./handlebars-helper')
 
 const app = express()
 const PORT = process.env.PORT
