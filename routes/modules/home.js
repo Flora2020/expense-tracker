@@ -4,17 +4,45 @@ const Category = require('../../models/category.js')
 const Record = require('../../models/record.js')
 const formateMongooseDate = require('../../formateMongooseDate.js')
 const generateIconHTML = require('../../generateIconHTML.js')
+const isValidDate = require('../../isValidDate.js')
+const daysOfMonth = require('../../daysOfMonth')
 
 const router = express.Router()
 
 router.get('/', (req, res) => {
-  const searchedCategory = req.query.category || ''
+  const selectedCategory = req.query.category || ''
+  const selectedMonth = req.query.month || ''
+  let year = req.query.year || new Date().getFullYear()
   const categories = []
+  const monthOption = []
   const filter = { userId: req.user._id }
   let totalAmount = 0
-  if (searchedCategory) {
-    filter.category = searchedCategory
+
+  for (let i = 0; i < 12; i++) {
+    monthOption.push({ month: `${i + 1}`, selectedMonth: selectedMonth })
   }
+
+  if (selectedCategory) {
+    filter.category = selectedCategory
+  }
+
+  if (selectedMonth) {
+    const month = ('0' + selectedMonth).slice(-2)
+    const date = `${year}-${month}-01`
+
+    if (!isValidDate(date)) {
+      req.flash('warning_msg', '西元年格式錯誤。正確格式：YYYY，第一個數字須為 1 或 2')
+      return res.redirect('/')
+    }
+
+    filter.date = {
+      $gte: new Date(date),
+      $lt: new Date(`${year}-${month}-${daysOfMonth(year, month)}`)
+    }
+  } else {
+    year = ''
+  }
+
   Category.find()
     .lean()
     .then((items) => {
@@ -31,7 +59,7 @@ router.get('/', (req, res) => {
             record.iconHTML = generateIconHTML(record.category)
           })
           totalAmount = totalAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-          res.render('index', { categories, records, totalAmount, searchedCategory })
+          res.render('index', { categories, monthOption, records, totalAmount, selectedCategory, year })
         })
         .catch(error => console.log(error))
     })
