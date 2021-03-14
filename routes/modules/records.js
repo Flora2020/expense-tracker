@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
   const { name, date, category, merchant, amount } = req.body
 
   if (!isValidDate(date)) {
-    req.flash('warning_msg', '不存在的日期，或日期格式不正確。正確的日期格式為 YYYY-MM-DD。')
+    req.flash('warning_msg', '不存在的日期，或日期格式不正確。正確的日期格式為 YYYY-MM-DD，西元年第一個數字須為 1 或 2。')
     return res.redirect('/records/new')
   }
 
@@ -62,7 +62,7 @@ router.put('/:id', (req, res) => {
   const { name, date, category, merchant, amount } = req.body
 
   if (!isValidDate(date)) {
-    req.flash('warning_msg', '不存在的日期，或日期格式不正確。正確的日期格式為 YYYY-MM-DD。')
+    req.flash('warning_msg', '不存在的日期，或日期格式不正確。正確的日期格式為 YYYY-MM-DD，西元年第一個數字須為 1 或 2。')
     return res.redirect(`/records/${_id}/edit`)
   }
 
