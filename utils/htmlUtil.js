@@ -1,4 +1,4 @@
-function generateIconHTML(category) {
+function generateIcon(category) {
   const icons = {
     '家居物業': '<i class="fas fa-home fa-3x"></i>',
     '交通出行': '<i class="fas fa-shuttle-van fa-3x"></i>',
@@ -10,4 +10,6 @@ function generateIconHTML(category) {
   return icons[category]
 }
 
-module.exports = generateIconHTML
+module.exports = {
+  generateIcon
+}

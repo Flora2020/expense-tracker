@@ -2,8 +2,7 @@ const express = require('express')
 
 const Category = require('../../models/category.js')
 const Record = require('../../models/record.js')
-const formateMongooseDate = require('../../formateMongooseDate.js')
-const isValidDate = require('../../isValidDate.js')
+const { formateMongooseDate, isValidDate } = require('../../utils/dateUtil.js')
 
 const router = express.Router()
 
