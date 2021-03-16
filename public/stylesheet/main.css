@@ -53,6 +53,19 @@
   width: 50vw;
 }
 
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #aaaaaa; 
+  opacity: 1; /* Firefox */
+}
+
+.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #aaaaaa;
+}
+
+.form-control::-webkit-input-placeholder { /* Edge */
+  color: #aaaaaa;
+}
+
 @media screen and (max-width: 768px) {
   .record .icon {
     margin-top: 2vh;
